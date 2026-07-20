@@ -224,11 +224,56 @@ def opp_row(k):
         <td style="padding:7px 8px;font-size:11px;color:#555;">{action}</td>
     </tr>'''
 
+def sel_row(k):
+    page = (k.get('landing_page','') or '-').replace(SITE_URL, '') or '/'
+    if k['position'] <= 10:
+        status = '<span style="background:#dcfce7;color:#16a34a;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;">✅ Top10</span>'
+    else:
+        status = f'<span style="background:#fef2f2;color:#ef4444;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;">距前10还差{k["position"]-10}名</span>'
+    return f'''<tr style="border-bottom:1px solid #f3f4f6;">
+        <td style="padding:7px 8px;font-size:12px;">{k['keyword']}</td>
+        <td style="text-align:center;padding:7px 8px;font-size:12px;font-weight:700;">#{k['position']}</td>
+        <td style="text-align:center;padding:7px 8px;font-size:12px;">{kw_delta_badge(k['delta'])}</td>
+        <td style="text-align:center;padding:7px 8px;font-size:12px;">{k.get('volume',0)}</td>
+        <td style="text-align:center;padding:7px 8px;">{status}</td>
+        <td style="padding:7px 8px;font-size:11px;color:#888;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{page}</td>
+    </tr>'''
+
 no_kw_row5 = '<tr><td colspan="5" style="padding:10px;font-size:12px;color:#888;">暂无数据</td></tr>'
 movers_up_rows      = "".join(kw_row(k) for k in kws.get('movers_up', [])) or no_kw_row5
 movers_down_rows    = "".join(kw_row(k) for k in kws.get('movers_down', [])) or no_kw_row5
 opportunities_rows  = "".join(opp_row(k) for k in kws.get('opportunities', [])) or '<tr><td colspan="4" style="padding:10px;font-size:12px;color:#888;">暂无符合条件的机会词</td></tr>'
 kw_updated = kws.get('updated_at','')[:10]
+
+sel = kws.get('selected')
+selected_keyword_html = ''
+if sel and sel.get('keywords'):
+    sel_rows = "".join(sel_row(k) for k in sel['keywords'])
+    selected_keyword_html = f'''<div class="card">
+  <h2>🎯 重点关键词监控 <span id="sel-date-label" style="font-size:11px;color:#888;font-weight:400;">（客户指定关键词 · {kw_updated} 数据）</span></h2>
+  <div class="g4" style="margin-bottom:16px;">
+    <div style="text-align:center;background:#f8fafc;border-radius:8px;padding:12px;">
+      <div id="sel-stat-total" style="font-size:24px;font-weight:800;color:#4f46e5;">{sel["total"]}</div>
+      <div style="font-size:11px;color:#888;">重点关键词数</div>
+    </div>
+    <div style="text-align:center;background:#f0fdf4;border-radius:8px;padding:12px;">
+      <div id="sel-stat-top10" style="font-size:24px;font-weight:800;color:#16a34a;">{sel["top10_count"]}</div>
+      <div style="font-size:11px;color:#888;">已进前10</div>
+    </div>
+    <div style="text-align:center;background:#fef2f2;border-radius:8px;padding:12px;">
+      <div id="sel-stat-remaining" style="font-size:24px;font-weight:800;color:#ef4444;">{sel["total"]-sel["top10_count"]}</div>
+      <div style="font-size:11px;color:#888;">尚未进前10</div>
+    </div>
+    <div style="text-align:center;background:#f8fafc;border-radius:8px;padding:12px;">
+      <div id="sel-stat-avg" style="font-size:24px;font-weight:800;color:#f59e0b;">#{sel["avg_position"]}</div>
+      <div style="font-size:11px;color:#888;">平均排名</div>
+    </div>
+  </div>
+  <table>
+    <tr><th>关键词</th><th style="text-align:center;">排名</th><th style="text-align:center;">变化</th><th style="text-align:center;">搜索量</th><th style="text-align:center;">状态</th><th>落地页</th></tr>
+    <tbody id="sel-kw-rows">{sel_rows}</tbody>
+  </table>
+</div>'''
 
 keyword_section_html = ''
 if kws.get('total_keywords'):
@@ -325,6 +370,20 @@ keyword_calendar_script = '' if not kws.get('total_keywords') else '''<script>
       '<td style="padding:7px 8px;font-size:11px;color:#555;">'+action+'</td>' +
       '</tr>';
   }
+  function selRow(k){
+    var page = (k.landing_page || '-').replace(location.origin, '') || '/';
+    var status = k.position <= 10
+      ? '<span style="background:#dcfce7;color:#16a34a;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;">✅ Top10</span>'
+      : '<span style="background:#fef2f2;color:#ef4444;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;">距前10还差'+(k.position-10)+'名</span>';
+    return '<tr style="border-bottom:1px solid #f3f4f6;">' +
+      '<td style="padding:7px 8px;font-size:12px;">'+escapeHtml(k.keyword)+'</td>' +
+      '<td style="text-align:center;padding:7px 8px;font-size:12px;font-weight:700;">#'+k.position+'</td>' +
+      '<td style="text-align:center;padding:7px 8px;font-size:12px;">'+deltaBadge(k.delta)+'</td>' +
+      '<td style="text-align:center;padding:7px 8px;font-size:12px;">'+(k.volume||0)+'</td>' +
+      '<td style="text-align:center;padding:7px 8px;">'+status+'</td>' +
+      '<td style="padding:7px 8px;font-size:11px;color:#888;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+escapeHtml(page)+'</td>' +
+      '</tr>';
+  }
   function renderData(data, dateStr){
     document.getElementById('kw-stat-total').textContent = data.total_keywords || 0;
     document.getElementById('kw-stat-avg').textContent = '#' + (data.avg_position != null ? data.avg_position : '-');
@@ -334,6 +393,18 @@ keyword_calendar_script = '' if not kws.get('total_keywords') else '''<script>
     document.getElementById('kw-movers-down').innerHTML = (data.movers_down||[]).map(kwRow).join('') || noRow(5);
     document.getElementById('kw-opportunities').innerHTML = (data.opportunities||[]).map(oppRow).join('') || noRow(4);
     document.getElementById('kw-date-label').textContent = '（' + dateStr + ' 数据）';
+
+    var sel = data.selected;
+    var selRows = document.getElementById('sel-kw-rows');
+    if (sel && selRows){
+      document.getElementById('sel-stat-total').textContent = sel.total || 0;
+      document.getElementById('sel-stat-top10').textContent = sel.top10_count || 0;
+      document.getElementById('sel-stat-remaining').textContent = (sel.total||0) - (sel.top10_count||0);
+      document.getElementById('sel-stat-avg').textContent = '#' + (sel.avg_position != null ? sel.avg_position : '-');
+      selRows.innerHTML = (sel.keywords||[]).map(selRow).join('') || noRow(6);
+      var selLabel = document.getElementById('sel-date-label');
+      if (selLabel) selLabel.textContent = '（客户指定关键词 · ' + dateStr + ' 数据）';
+    }
   }
   function loadDate(dateStr){
     fetch('keywords-history/' + dateStr + '.json')
@@ -494,6 +565,7 @@ html = f'''<!DOCTYPE html>
 
 <!-- Keyword rankings (refreshed daily) -->
 {keyword_section_html}
+{selected_keyword_html}
 {keyword_calendar_script}
 
 <!-- Full Checklist -->
