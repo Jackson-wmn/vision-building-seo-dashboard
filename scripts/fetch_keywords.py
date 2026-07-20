@@ -26,7 +26,10 @@ def find_selected_group_id(site_id):
     groups = groups if isinstance(groups, list) else groups.get('data', [])
     for g in groups:
         if 'selected' in g.get('name', '').lower():
-            return g.get('id')
+            try:
+                return int(g.get('id'))  # group id here is a string; keyword.group_id is an int
+            except (TypeError, ValueError):
+                return g.get('id')
     return None
 
 def build_snapshot(all_keywords, selected_group_id=None):
