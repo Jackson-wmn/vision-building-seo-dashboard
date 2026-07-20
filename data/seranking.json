@@ -1,6 +1,6 @@
 {
   "updated_at": "2026-07-20",
-  "source": "SE Ranking API (via MCP)",
+  "source": "SE Ranking API (自动)",
   "audit_id": 31717,
   "health_score": 62,
   "total_issues": 782,
@@ -8,7 +8,7 @@
   "warnings": 272,
   "notices": 432,
   "pages_crawled": 141,
-  "domain_expiry": "",
+  "domain_expiry": "N/A",
   "domain_trust": 38,
   "backlinks": "133",
   "referring_domains": "55",
@@ -20,7 +20,7 @@
       "severity": "严重",
       "description": "1个页面返回404错误",
       "effort": "1小时",
-      "fix": "找到含断链的页面 → 修复或删除断链"
+      "fix": "找到含 _wp_link_placeholder 的博客文章 → 修复或删除断链"
     },
     "redirects_3xx": {
       "count": 46,
@@ -34,9 +34,9 @@
       "count": 62,
       "label": "重复页面标题",
       "severity": "高",
-      "description": "62个页面标题重复",
+      "description": "62个页面标题重复（EN/ZH版本相同）",
       "effort": "2小时",
-      "fix": "逐页检查并改写重复的 meta title"
+      "fix": "TranslatePress → 逐页翻译 meta title"
     },
     "duplicate_descriptions": {
       "count": 21,
@@ -44,15 +44,15 @@
       "severity": "高",
       "description": "21个页面描述重复",
       "effort": "2小时",
-      "fix": "逐页检查并改写重复的 meta description"
+      "fix": "TranslatePress → 逐页翻译 meta description"
     },
     "duplicate_h1": {
       "count": 12,
       "label": "重复 H1 标签",
       "severity": "中",
-      "description": "12个页面 H1 重复",
+      "description": "12个页面 H1 与中文版相同",
       "effort": "1小时",
-      "fix": "检查并改写重复的 H1"
+      "fix": "TranslatePress → 翻译各页面 H1 内容"
     },
     "same_title_h1": {
       "count": 1,
@@ -68,7 +68,7 @@
       "severity": "高",
       "description": "7个页面加载速度慢",
       "effort": "持续",
-      "fix": "压缩图片、启用缓存、精简 JS/CSS"
+      "fix": "Elementor → Improved Asset Loading；Breeze → JS defer + CSS 合并"
     },
     "internal_links_3xx": {
       "count": 21,
@@ -84,7 +84,7 @@
       "severity": "严重",
       "description": "XML sitemap 缺失，影响 Google 爬取效率",
       "effort": "10分钟",
-      "fix": "生成并提交 XML sitemap 到 GSC"
+      "fix": "Rank Math → Sitemap → 开启并提交到 GSC"
     }
   }
 }
