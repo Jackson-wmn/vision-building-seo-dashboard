@@ -5,6 +5,9 @@ on:
     - cron: '0 1 * * 1'  # Every Monday 9am Malaysia time (UTC+8). Adjust for your timezone.
   workflow_dispatch:       # Allow manual trigger from GitHub UI
 
+permissions:
+  contents: write
+
 jobs:
   audit:
     runs-on: ubuntu-latest
