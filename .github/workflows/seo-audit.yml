@@ -1,0 +1,53 @@
+name: Weekly SEO Audit
+
+on:
+  schedule:
+    - cron: '0 1 * * 1'  # Every Monday 9am Malaysia time (UTC+8). Adjust for your timezone.
+  workflow_dispatch:       # Allow manual trigger from GitHub UI
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install google-api-python-client google-analytics-data google-auth requests
+
+      - name: Write service account credentials
+        run: echo '${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}' > /tmp/service-account.json
+
+      - name: Run SEO Audit (GSC + GA4 + Technical)
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: /tmp/service-account.json
+          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+          GSC_SITE_URL: ${{ secrets.GSC_SITE_URL }}
+          SITE_URL: ${{ secrets.SITE_URL }}
+        run: python scripts/audit.py
+
+      - name: Fetch SE Ranking Audit Data (optional)
+        env:
+          SERANKING_API_KEY: ${{ secrets.SERANKING_API_KEY }}
+          SERANKING_AUDIT_ID: ${{ secrets.SERANKING_AUDIT_ID }}
+        run: python scripts/fetch_seranking.py
+
+      - name: Generate Dashboard
+        env:
+          BRAND_NAME: ${{ secrets.BRAND_NAME }}
+          SITE_URL: ${{ secrets.SITE_URL }}
+        run: python scripts/generate_dashboard.py
+
+      - name: Commit and push results
+        run: |
+          git config user.name "SEO Audit Bot"
+          git config user.email "actions@github.com"
+          git add data/ docs/
+          git diff --staged --quiet || git commit -m "Weekly SEO Audit - $(date '+%Y-%m-%d')"
+          git push

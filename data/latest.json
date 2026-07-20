@@ -1,0 +1,46 @@
+{
+  "generated_at": "2026-07-20T03:53:16.483730Z",
+  "site": "https://vision.build",
+  "period_days": 90,
+  "scores": {
+    "overall": 60,
+    "technical": 70,
+    "content": 58,
+    "on_page": 55,
+    "schema": 42,
+    "performance": 50,
+    "ai": 73,
+    "images": 75
+  },
+  "gsc": {
+    "total_clicks": 0,
+    "total_impressions": 0,
+    "avg_ctr": 0.0,
+    "avg_position": 0,
+    "top_queries": [],
+    "top_pages": [],
+    "countries": [],
+    "devices": []
+  },
+  "ga4": {
+    "total_sessions": 0,
+    "channels": [],
+    "top_pages": []
+  },
+  "technical": {
+    "has_hsts": true,
+    "has_xframe": false,
+    "has_xcontent": false,
+    "has_csp": false,
+    "has_permissions": false,
+    "security_headers": 1,
+    "rest_api_exposed": false,
+    "rest_api_users": 0,
+    "has_llms_txt": true,
+    "gptbot_allowed": true,
+    "claudebot_allowed": true,
+    "wp_version_exposed": false,
+    "wp_version": "",
+    "xmlrpc_advertised": false
+  }
+}

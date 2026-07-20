@@ -1,0 +1,90 @@
+{
+  "updated_at": "2026-07-20",
+  "source": "SE Ranking API (via MCP)",
+  "audit_id": 31717,
+  "health_score": 62,
+  "total_issues": 782,
+  "errors": 78,
+  "warnings": 272,
+  "notices": 432,
+  "pages_crawled": 141,
+  "domain_expiry": "",
+  "domain_trust": 38,
+  "backlinks": "133",
+  "referring_domains": "55",
+  "google_index": "470",
+  "issues": {
+    "broken_4xx": {
+      "count": 1,
+      "label": "4XX 断链",
+      "severity": "严重",
+      "description": "1个页面返回404错误",
+      "effort": "1小时",
+      "fix": "找到含断链的页面 → 修复或删除断链"
+    },
+    "redirects_3xx": {
+      "count": 46,
+      "label": "3XX 重定向链",
+      "severity": "中",
+      "description": "46个页面有重定向",
+      "effort": "30分钟",
+      "fix": "更新内部链接直接指向最终URL"
+    },
+    "duplicate_titles": {
+      "count": 62,
+      "label": "重复页面标题",
+      "severity": "高",
+      "description": "62个页面标题重复",
+      "effort": "2小时",
+      "fix": "逐页检查并改写重复的 meta title"
+    },
+    "duplicate_descriptions": {
+      "count": 21,
+      "label": "重复 Meta Description",
+      "severity": "高",
+      "description": "21个页面描述重复",
+      "effort": "2小时",
+      "fix": "逐页检查并改写重复的 meta description"
+    },
+    "duplicate_h1": {
+      "count": 12,
+      "label": "重复 H1 标签",
+      "severity": "中",
+      "description": "12个页面 H1 重复",
+      "effort": "1小时",
+      "fix": "检查并改写重复的 H1"
+    },
+    "same_title_h1": {
+      "count": 1,
+      "label": "Title 与 H1 完全相同",
+      "severity": "低",
+      "description": "1个页面 Title 和 H1 完全一样，浪费优化空间",
+      "effort": "持续",
+      "fix": "将 Title 改为包含关键词的完整句子，H1 保持简短"
+    },
+    "slow_pages": {
+      "count": 7,
+      "label": "页面加载速度慢",
+      "severity": "高",
+      "description": "7个页面加载速度慢",
+      "effort": "持续",
+      "fix": "压缩图片、启用缓存、精简 JS/CSS"
+    },
+    "internal_links_3xx": {
+      "count": 21,
+      "label": "内部链接指向重定向页",
+      "severity": "中",
+      "description": "21个内部链接指向3XX重定向页面",
+      "effort": "30分钟",
+      "fix": "更新内部链接直接指向最终目标URL"
+    },
+    "sitemap_missing": {
+      "count": 1,
+      "label": "XML Sitemap 缺失",
+      "severity": "严重",
+      "description": "XML sitemap 缺失，影响 Google 爬取效率",
+      "effort": "10分钟",
+      "fix": "生成并提交 XML sitemap 到 GSC"
+    }
+  }
+}
