@@ -109,6 +109,7 @@ Settings → Secrets and variables → Actions → New repository secret：
 | `GSC_SITE_URL` | `sc-domain:yourdomain.com` |
 | `SERANKING_API_KEY` | （选填）|
 | `SERANKING_AUDIT_ID` | （选填）|
+| `SERANKING_SITE_ID` | SE Ranking Project ID，用于每日关键词排名走向（选填）|
 
 ### 5c. 启用 GitHub Pages
 

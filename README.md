@@ -44,6 +44,7 @@
 | `BRAND_NAME` | 品牌名称，例如 `Iconfit Fitness Club` | ✅ |
 | `SERANKING_API_KEY` | SE Ranking API Key（选填）| ⬜ |
 | `SERANKING_AUDIT_ID` | SE Ranking Audit ID（选填）| ⬜ |
+| `SERANKING_SITE_ID` | SE Ranking Project ID，用于每日关键词排名走向（选填）| ⬜ |
 
 ### 第四步：启用 GitHub Pages
 

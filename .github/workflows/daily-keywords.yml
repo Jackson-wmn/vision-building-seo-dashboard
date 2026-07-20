@@ -1,0 +1,42 @@
+name: Daily Keyword Rankings
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Every day 8am Malaysia time (UTC+8). Offset from the weekly full audit (9am Monday) to avoid a push collision.
+  workflow_dispatch:       # Allow manual trigger from GitHub UI
+
+permissions:
+  contents: write
+
+jobs:
+  keywords:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Fetch keyword ranking trends
+        env:
+          SERANKING_API_KEY: ${{ secrets.SERANKING_API_KEY }}
+          SERANKING_SITE_ID: ${{ secrets.SERANKING_SITE_ID }}
+        run: python scripts/fetch_keywords.py
+
+      - name: Regenerate dashboard
+        env:
+          BRAND_NAME: ${{ secrets.BRAND_NAME }}
+          SITE_URL: ${{ secrets.SITE_URL }}
+        run: python scripts/generate_dashboard.py
+
+      - name: Commit and push results
+        run: |
+          git config user.name "SEO Audit Bot"
+          git config user.email "actions@github.com"
+          git add data/keywords.json docs/
+          git diff --staged --quiet || git commit -m "Daily keyword ranking update - $(date '+%Y-%m-%d')"
+          git push

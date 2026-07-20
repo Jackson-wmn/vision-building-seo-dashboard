@@ -20,6 +20,13 @@ try:
 except Exception:
     ser = {}
 
+# Keyword rankings, refreshed daily independently of the weekly audit above
+try:
+    with open('data/keywords.json') as f:
+        kws = json.load(f)
+except Exception:
+    kws = {}
+
 def score_color(s):
     if s >= 70: return '#16a34a'
     if s >= 50: return '#f59e0b'
@@ -33,36 +40,28 @@ def score_label(s):
 def bar(pct, color='#4f46e5', height=8):
     return f'<div style="background:#e5e7eb;border-radius:4px;height:{height}px;"><div style="background:{color};width:{min(float(pct),100):.0f}%;height:{height}px;border-radius:4px;transition:width 0.3s;"></div></div>'
 
-# ── Issues checklist ──────────────────────────────────────────
+# ── Issues checklist (only real, dynamically-detected issues) ──
 issues = [
     # (category, title, status, severity, fix, effort)
-    ('安全', 'REST API 用户账号外露（8个账号公开）', not tech['rest_api_exposed'], '严重', 'functions.php 加入 REST API 过滤，或用 Wordfence 封锁 /wp-json/wp/v2/users', '15分钟'),
-    ('安全', '5个安全 Headers 全部缺失', tech['security_headers'] >= 5, '严重', 'Cloudflare → Transform Rules → Modify Response Header → 一次加入5个', '15分钟'),
+    ('安全', f'REST API 用户账号外露（{tech.get("rest_api_users",0)}个账号公开）', not tech['rest_api_exposed'], '严重', 'functions.php 加入 REST API 过滤，或用 Wordfence 封锁 /wp-json/wp/v2/users', '15分钟'),
+    ('安全', f'{5-tech["security_headers"]}个安全 Headers 缺失', tech['security_headers'] >= 5, '严重', 'Cloudflare → Transform Rules → Modify Response Header → 补齐缺失的 headers', '15分钟'),
     ('安全', 'WordPress 版本外露', not tech['wp_version_exposed'], '中', 'functions.php 加入 remove_action("wp_head","wp_generator")', '5分钟'),
     ('安全', 'xmlrpc.php 在 head 中广告', not tech['xmlrpc_advertised'], '中', 'functions.php 加入 remove_action("wp_head","rsd_link")，再用 Cloudflare WAF 封锁路径', '10分钟'),
     ('AI 可见度', 'ClaudeBot 被单独封锁（GPTBot 可进）', tech['claudebot_allowed'], '严重', 'Cloudflare → Security → WAF → 找封锁 ClaudeBot 的规则 → 删除', '5分钟'),
-    ('AI 可见度', '/llms.txt 已创建', tech['has_llms_txt'], '高', 'WordPress functions.php 已加入 llms.txt 代码', '完成'),
-    ('Schema', f'Organization name 未设置为品牌名', False, '高', f'Rank Math → Local SEO → Business Info → Business Name → 改为 "{BRAND_NAME}"', '5分钟'),
-    ('Schema', 'Homepage 有 Article schema', False, '高', 'Rank Math → 首页 → Schema 标签 → 删除 Article 区块', '10分钟'),
-    ('Schema', 'Person.sameAs 有 staging URL', False, '中', 'WordPress → 用户 → 删除 staging/cloudwaysapps.com 链接', '5分钟'),
-    ('Schema', 'openingHours 格式错误', False, '低', 'Rank Math → Local SEO → Opening Hours → 检查格式', '5分钟'),
-    ('本地SEO', '电话号码不一致', False, '高', '统一全站电话号码 + Google Business Profile', '30分钟'),
-    ('本地SEO', 'hreflang 地区设置错误', False, '中', 'Rank Math → Titles & Meta → 检查 hreflang，加入 x-default', '15分钟'),
-    ('内容', '高跳出率页面需优化', False, '高', '检查跳出率 >80% 的页面，改善内容和加载速度', '2小时'),
-    ('内容', '没有团队/关于页面', False, '高', '创建团队页面，加入人员照片、资历、专长（提升 E-E-A-T）', '4小时'),
-    ('内容', '博客文章内容太短', False, '中', '将热门文章扩展至1500+字', '持续'),
-    ('内容', '没有隐私政策页面', False, '中', '添加 Privacy Policy 页面', '30分钟'),
-    ('性能', '浏览器缓存未设置', False, '中', '缓存插件 → 浏览器缓存 → 设为 86400（1天）', '10分钟'),
-    ('性能', 'JS 没有 defer', False, '中', 'Elementor → Experiments → Improved Asset Loading → 开启', '10分钟'),
+    ('AI 可见度', '/llms.txt 已创建', tech['has_llms_txt'], '高', 'WordPress functions.php 加入 llms.txt 代码', '完成'),
 ] + ([
-    # SE Ranking issues (dynamic, from seranking.json)
-    ('链接健康', f'{ser["issues"].get("broken_4xx",{}).get("count",0)}个断链（4XX）', False, '严重', ser["issues"].get("broken_4xx",{}).get("fix","修复断链"), ser["issues"].get("broken_4xx",{}).get("effort","1小时")),
-    ('链接健康', f'{ser["issues"].get("redirects_3xx",{}).get("count",0)}个内部链接经过3XX重定向', False, '中', ser["issues"].get("redirects_3xx",{}).get("fix","更新链接"), ser["issues"].get("redirects_3xx",{}).get("effort","30分钟")),
-    ('多语言SEO', f'{ser["issues"].get("duplicate_titles",{}).get("count",0)}个页面标题重复', False, '高', ser["issues"].get("duplicate_titles",{}).get("fix","翻译标题"), ser["issues"].get("duplicate_titles",{}).get("effort","2小时")),
-    ('多语言SEO', f'{ser["issues"].get("duplicate_descriptions",{}).get("count",0)}个 Meta Description 重复', False, '高', ser["issues"].get("duplicate_descriptions",{}).get("fix","翻译描述"), ser["issues"].get("duplicate_descriptions",{}).get("effort","2小时")),
-    ('多语言SEO', f'{ser["issues"].get("missing_x_default",{}).get("count",0)}个页面缺少 x-default hreflang', False, '高', ser["issues"].get("missing_x_default",{}).get("fix","添加 hreflang"), ser["issues"].get("missing_x_default",{}).get("effort","15分钟")),
-    ('域名', f'🚨 域名将于 {ser.get("domain_expiry","?")} 到期', False, '严重', '立即登入域名注册商续费！过期将导致网站完全下线', '立即'),
-] if ser and ser.get('issues') and ser.get('domain_expiry') else [])
+    # SE Ranking issues (dynamic, from seranking.json — status is "fixed" when count is 0)
+    ('链接健康', f'{ser["issues"].get("broken_4xx",{}).get("count",0)}个断链（4XX）', ser["issues"].get("broken_4xx",{}).get("count",0)==0, '严重', ser["issues"].get("broken_4xx",{}).get("fix","修复断链"), ser["issues"].get("broken_4xx",{}).get("effort","1小时")),
+    ('链接健康', f'{ser["issues"].get("redirects_3xx",{}).get("count",0)}个内部链接经过3XX重定向', ser["issues"].get("redirects_3xx",{}).get("count",0)==0, '中', ser["issues"].get("redirects_3xx",{}).get("fix","更新链接"), ser["issues"].get("redirects_3xx",{}).get("effort","30分钟")),
+    ('链接健康', f'{ser["issues"].get("internal_links_3xx",{}).get("count",0)}个内部链接指向重定向页', ser["issues"].get("internal_links_3xx",{}).get("count",0)==0, '中', ser["issues"].get("internal_links_3xx",{}).get("fix","更新链接"), ser["issues"].get("internal_links_3xx",{}).get("effort","30分钟")),
+    ('页面质量', f'{ser["issues"].get("duplicate_titles",{}).get("count",0)}个页面标题重复', ser["issues"].get("duplicate_titles",{}).get("count",0)==0, '高', ser["issues"].get("duplicate_titles",{}).get("fix","改写重复标题"), ser["issues"].get("duplicate_titles",{}).get("effort","2小时")),
+    ('页面质量', f'{ser["issues"].get("duplicate_descriptions",{}).get("count",0)}个 Meta Description 重复', ser["issues"].get("duplicate_descriptions",{}).get("count",0)==0, '高', ser["issues"].get("duplicate_descriptions",{}).get("fix","改写重复描述"), ser["issues"].get("duplicate_descriptions",{}).get("effort","2小时")),
+    ('页面质量', f'{ser["issues"].get("duplicate_h1",{}).get("count",0)}个页面 H1 重复', ser["issues"].get("duplicate_h1",{}).get("count",0)==0, '中', ser["issues"].get("duplicate_h1",{}).get("fix","改写重复 H1"), ser["issues"].get("duplicate_h1",{}).get("effort","1小时")),
+    ('页面质量', f'{ser["issues"].get("slow_pages",{}).get("count",0)}个页面加载速度慢', ser["issues"].get("slow_pages",{}).get("count",0)==0, '高', ser["issues"].get("slow_pages",{}).get("fix","优化加载速度"), ser["issues"].get("slow_pages",{}).get("effort","持续")),
+    ('页面质量', f'{ser["issues"].get("sitemap_missing",{}).get("count",0)}个 XML Sitemap 问题', ser["issues"].get("sitemap_missing",{}).get("count",0)==0, '严重', ser["issues"].get("sitemap_missing",{}).get("fix","生成并提交 sitemap"), ser["issues"].get("sitemap_missing",{}).get("effort","10分钟")),
+] if ser and ser.get('issues') else []) + ([
+    ('域名', f'🚨 域名将于 {ser.get("domain_expiry")} 到期', False, '严重', '立即登入域名注册商续费！过期将导致网站完全下线', '立即'),
+] if ser.get('domain_expiry') and ser.get('domain_expiry') != 'N/A' else [])
 
 fixed_count = sum(1 for i in issues if i[2])
 total_count = len(issues)
@@ -75,7 +74,7 @@ for issue in issues:
     by_cat[issue[0]].append(issue)
 
 cat_html = ''
-cat_colors = {'安全':'#ef4444','AI 可见度':'#8b5cf6','Schema':'#3b82f6','本地SEO':'#f59e0b','内容':'#10b981','性能':'#6366f1','链接健康':'#0ea5e9','多语言SEO':'#a855f7','域名':'#dc2626'}
+cat_colors = {'安全':'#ef4444','AI 可见度':'#8b5cf6','链接健康':'#0ea5e9','页面质量':'#a855f7','域名':'#dc2626'}
 
 for cat, items in by_cat.items():
     color = cat_colors.get(cat, '#888')
@@ -200,6 +199,82 @@ if ser.get('domain_expiry') and ser.get('domain_expiry') != 'N/A':
   </div>
 </div>'''
 
+# ── Keyword rankings (daily, from keywords.json) ────────────────
+def kw_delta_badge(delta):
+    if delta > 0:  return f'<span style="color:#16a34a;font-weight:700;">▲ {delta}</span>'
+    if delta < 0:  return f'<span style="color:#ef4444;font-weight:700;">▼ {abs(delta)}</span>'
+    return '<span style="color:#888;">– 0</span>'
+
+def kw_row(k):
+    page = (k.get('landing_page','') or '-').replace(SITE_URL, '') or '/'
+    return f'''<tr style="border-bottom:1px solid #f3f4f6;">
+        <td style="padding:7px 8px;font-size:12px;">{k['keyword']}</td>
+        <td style="text-align:center;padding:7px 8px;font-size:12px;font-weight:700;">#{k['position']}</td>
+        <td style="text-align:center;padding:7px 8px;font-size:12px;">{kw_delta_badge(k['delta'])}</td>
+        <td style="text-align:center;padding:7px 8px;font-size:12px;">{k.get('volume',0)}</td>
+        <td style="padding:7px 8px;font-size:11px;color:#888;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{page}</td>
+    </tr>'''
+
+def opp_row(k):
+    action = f"排名 #{k['position']}，月搜索量 {k.get('volume',0)}，已进前30名，加强内链/更新内容有机会冲进前10"
+    return f'''<tr style="border-bottom:1px solid #f3f4f6;">
+        <td style="padding:7px 8px;font-size:12px;">{k['keyword']}</td>
+        <td style="text-align:center;padding:7px 8px;font-size:12px;font-weight:700;color:#f59e0b;">#{k['position']}</td>
+        <td style="text-align:center;padding:7px 8px;font-size:12px;">{k.get('volume',0)}</td>
+        <td style="padding:7px 8px;font-size:11px;color:#555;">{action}</td>
+    </tr>'''
+
+no_kw_row5 = '<tr><td colspan="5" style="padding:10px;font-size:12px;color:#888;">暂无数据</td></tr>'
+movers_up_rows      = "".join(kw_row(k) for k in kws.get('movers_up', [])) or no_kw_row5
+movers_down_rows    = "".join(kw_row(k) for k in kws.get('movers_down', [])) or no_kw_row5
+opportunities_rows  = "".join(opp_row(k) for k in kws.get('opportunities', [])) or '<tr><td colspan="4" style="padding:10px;font-size:12px;color:#888;">暂无符合条件的机会词</td></tr>'
+kw_updated = kws.get('updated_at','')[:10]
+
+keyword_section_html = ''
+if kws.get('total_keywords'):
+    keyword_section_html = f'''<div class="card">
+  <h2>🔑 关键词排名走向 <span style="font-size:11px;color:#888;font-weight:400;">（每天更新 · 最后更新 {kw_updated}）</span></h2>
+  <div class="g4" style="margin-bottom:16px;">
+    <div style="text-align:center;background:#f8fafc;border-radius:8px;padding:12px;">
+      <div style="font-size:24px;font-weight:800;color:#4f46e5;">{kws.get("total_keywords",0)}</div>
+      <div style="font-size:11px;color:#888;">追踪关键词数</div>
+    </div>
+    <div style="text-align:center;background:#f8fafc;border-radius:8px;padding:12px;">
+      <div style="font-size:24px;font-weight:800;color:#f59e0b;">#{kws.get("avg_position","-")}</div>
+      <div style="font-size:11px;color:#888;">平均排名</div>
+    </div>
+    <div style="text-align:center;background:#f0fdf4;border-radius:8px;padding:12px;">
+      <div style="font-size:24px;font-weight:800;color:#16a34a;">{kws.get("top10_count",0)}</div>
+      <div style="font-size:11px;color:#888;">Top 10 关键词数</div>
+    </div>
+    <div style="text-align:center;background:#f8fafc;border-radius:8px;padding:12px;">
+      <div style="font-size:24px;font-weight:800;color:#8b5cf6;">{len(kws.get("opportunities",[]))}</div>
+      <div style="font-size:11px;color:#888;">潜力机会词</div>
+    </div>
+  </div>
+  <div class="g2" style="margin-bottom:16px;">
+    <div>
+      <h2 style="font-size:12px;color:#16a34a;margin-bottom:8px;">📈 排名上升最多（近7天）</h2>
+      <table>
+        <tr><th>关键词</th><th style="text-align:center;">排名</th><th style="text-align:center;">变化</th><th style="text-align:center;">搜索量</th><th>落地页</th></tr>
+        {movers_up_rows}
+      </table>
+    </div>
+    <div>
+      <h2 style="font-size:12px;color:#ef4444;margin-bottom:8px;">📉 排名下降最多（近7天）</h2>
+      <table>
+        <tr><th>关键词</th><th style="text-align:center;">排名</th><th style="text-align:center;">变化</th><th style="text-align:center;">搜索量</th><th>落地页</th></tr>
+        {movers_down_rows}
+      </table>
+    </div>
+  </div>
+  <h2 style="font-size:12px;color:#8b5cf6;margin-bottom:8px;">🎯 潜力机会词（排名11-30名，有搜索量）</h2>
+  <table>
+    <tr><th>关键词</th><th style="text-align:center;">当前排名</th><th style="text-align:center;">搜索量</th><th>建议行动</th></tr>
+    {opportunities_rows}
+  </table>
+</div>'''
+
 html = f'''<!DOCTYPE html>
 <html lang="zh">
 <head>
@@ -228,7 +303,7 @@ html = f'''<!DOCTYPE html>
 <div class="card" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;background:linear-gradient(135deg,#1e293b,#334155);color:white;">
   <div>
     <div style="font-size:20px;font-weight:800;">{BRAND_NAME} SEO Dashboard</div>
-    <div style="font-size:12px;color:#94a3b8;margin-top:4px;">{SITE_URL} · 更新：{gen_at} · 每周一自动刷新 · 统计：过去90天</div>
+    <div style="font-size:12px;color:#94a3b8;margin-top:4px;">{SITE_URL} · 完整报告更新：{gen_at}（每周一）· 关键词排名每天更新 · 统计：过去90天</div>
   </div>
   <div style="text-align:center;background:rgba(255,255,255,.1);border-radius:12px;padding:12px 20px;">
     <div style="font-size:40px;font-weight:800;color:{score_color(scores['overall'])};">{scores['overall']}</div>
@@ -308,6 +383,9 @@ html = f'''<!DOCTYPE html>
   </div>
 </div>
 
+<!-- Keyword rankings (refreshed daily) -->
+{keyword_section_html}
+
 <!-- Full Checklist -->
 <div class="card">
   <h2>📋 完整问题清单 & 修复指引</h2>
@@ -346,7 +424,7 @@ html = f'''<!DOCTYPE html>
 
 <!-- Footer -->
 <div style="text-align:center;padding:16px;font-size:11px;color:#94a3b8;">
-  数据来源：Google Search Console · Google Analytics 4 · 实时技术检测 · SE Ranking（手动导入）· 每周一 09:00（马来西亚时间）自动更新
+  数据来源：Google Search Console · Google Analytics 4 · 实时技术检测 · SE Ranking 网站健康报告（每周一自动更新）· SE Ranking 关键词排名（每天自动更新）
 </div>
 
 </div>
