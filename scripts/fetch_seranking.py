@@ -6,7 +6,7 @@ import os, json, datetime, urllib.request, urllib.error
 
 API_KEY   = os.environ.get('SERANKING_API_KEY', '')
 AUDIT_ID  = int(os.environ.get('SERANKING_AUDIT_ID', '700348552'))
-BASE_URL  = 'https://api4.seranking.com'
+BASE_URL  = 'https://api.seranking.com/v1'
 
 def api(path):
     req = urllib.request.Request(
@@ -24,7 +24,7 @@ def main():
     print(f"📊 从 SE Ranking 拉取 audit #{AUDIT_ID} 数据...")
 
     try:
-        report = api(f'/site/audit/{AUDIT_ID}/report/')
+        report = api(f'/site-audit/audits/report?audit_id={AUDIT_ID}')
     except urllib.error.HTTPError as e:
         print(f"❌ SE Ranking API 错误：{e.code} {e.reason}")
         return
