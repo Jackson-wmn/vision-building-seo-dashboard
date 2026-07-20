@@ -82,6 +82,25 @@ def main():
     with open('data/keywords.json', 'w', encoding='utf-8') as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
 
+    # Archive today's snapshot under docs/ so the dashboard's calendar can fetch it client-side
+    # (only files inside docs/ are served by GitHub Pages)
+    history_dir = 'docs/keywords-history'
+    os.makedirs(history_dir, exist_ok=True)
+    with open(f'{history_dir}/{today.isoformat()}.json', 'w', encoding='utf-8') as f:
+        json.dump(output, f, indent=2, ensure_ascii=False)
+
+    index_path = f'{history_dir}/index.json'
+    try:
+        with open(index_path) as f:
+            index = json.load(f)
+    except Exception:
+        index = {'dates': []}
+    if today.isoformat() not in index['dates']:
+        index['dates'].append(today.isoformat())
+        index['dates'].sort()
+    with open(index_path, 'w', encoding='utf-8') as f:
+        json.dump(index, f, indent=2)
+
     print(f"✅ 关键词走向已更新：追踪 {len(processed)} 个关键词，平均排名 {avg_position}，Top10 有 {top10_count} 个")
 
 if __name__ == '__main__':

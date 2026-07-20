@@ -233,22 +233,33 @@ kw_updated = kws.get('updated_at','')[:10]
 keyword_section_html = ''
 if kws.get('total_keywords'):
     keyword_section_html = f'''<div class="card">
-  <h2>🔑 关键词排名走向 <span style="font-size:11px;color:#888;font-weight:400;">（每天更新 · 最后更新 {kw_updated}）</span></h2>
+  <h2>🔑 关键词排名走向 <span id="kw-date-label" style="font-size:11px;color:#888;font-weight:400;">（{kw_updated} 数据 · 每天更新）</span></h2>
+
+  <div style="max-width:280px;margin-bottom:16px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+      <button id="kw-cal-prev" type="button" style="border:none;background:#f1f5f9;border-radius:6px;padding:4px 10px;cursor:pointer;font-size:13px;">‹</button>
+      <span id="kw-cal-month-label" style="font-size:12px;font-weight:700;color:#555;"></span>
+      <button id="kw-cal-next" type="button" style="border:none;background:#f1f5f9;border-radius:6px;padding:4px 10px;cursor:pointer;font-size:13px;">›</button>
+    </div>
+    <div id="kw-cal-grid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;font-size:11px;text-align:center;"></div>
+    <div style="font-size:10px;color:#aaa;margin-top:6px;">点击有数据的日期查看当天的关键词报告</div>
+  </div>
+
   <div class="g4" style="margin-bottom:16px;">
     <div style="text-align:center;background:#f8fafc;border-radius:8px;padding:12px;">
-      <div style="font-size:24px;font-weight:800;color:#4f46e5;">{kws.get("total_keywords",0)}</div>
+      <div id="kw-stat-total" style="font-size:24px;font-weight:800;color:#4f46e5;">{kws.get("total_keywords",0)}</div>
       <div style="font-size:11px;color:#888;">追踪关键词数</div>
     </div>
     <div style="text-align:center;background:#f8fafc;border-radius:8px;padding:12px;">
-      <div style="font-size:24px;font-weight:800;color:#f59e0b;">#{kws.get("avg_position","-")}</div>
+      <div id="kw-stat-avg" style="font-size:24px;font-weight:800;color:#f59e0b;">#{kws.get("avg_position","-")}</div>
       <div style="font-size:11px;color:#888;">平均排名</div>
     </div>
     <div style="text-align:center;background:#f0fdf4;border-radius:8px;padding:12px;">
-      <div style="font-size:24px;font-weight:800;color:#16a34a;">{kws.get("top10_count",0)}</div>
+      <div id="kw-stat-top10" style="font-size:24px;font-weight:800;color:#16a34a;">{kws.get("top10_count",0)}</div>
       <div style="font-size:11px;color:#888;">Top 10 关键词数</div>
     </div>
     <div style="text-align:center;background:#f8fafc;border-radius:8px;padding:12px;">
-      <div style="font-size:24px;font-weight:800;color:#8b5cf6;">{len(kws.get("opportunities",[]))}</div>
+      <div id="kw-stat-opp" style="font-size:24px;font-weight:800;color:#8b5cf6;">{len(kws.get("opportunities",[]))}</div>
       <div style="font-size:11px;color:#888;">潜力机会词</div>
     </div>
   </div>
@@ -257,23 +268,121 @@ if kws.get('total_keywords'):
       <h2 style="font-size:12px;color:#16a34a;margin-bottom:8px;">📈 排名上升最多（近7天）</h2>
       <table>
         <tr><th>关键词</th><th style="text-align:center;">排名</th><th style="text-align:center;">变化</th><th style="text-align:center;">搜索量</th><th>落地页</th></tr>
-        {movers_up_rows}
+        <tbody id="kw-movers-up">{movers_up_rows}</tbody>
       </table>
     </div>
     <div>
       <h2 style="font-size:12px;color:#ef4444;margin-bottom:8px;">📉 排名下降最多（近7天）</h2>
       <table>
         <tr><th>关键词</th><th style="text-align:center;">排名</th><th style="text-align:center;">变化</th><th style="text-align:center;">搜索量</th><th>落地页</th></tr>
-        {movers_down_rows}
+        <tbody id="kw-movers-down">{movers_down_rows}</tbody>
       </table>
     </div>
   </div>
   <h2 style="font-size:12px;color:#8b5cf6;margin-bottom:8px;">🎯 潜力机会词（排名11-30名，有搜索量）</h2>
   <table>
     <tr><th>关键词</th><th style="text-align:center;">当前排名</th><th style="text-align:center;">搜索量</th><th>建议行动</th></tr>
-    {opportunities_rows}
+    <tbody id="kw-opportunities">{opportunities_rows}</tbody>
   </table>
 </div>'''
+
+# Plain (non-f) string: the calendar/history JS is written once and reused verbatim,
+# so its own { } braces never need escaping.
+keyword_calendar_script = '' if not kws.get('total_keywords') else '''<script>
+(function(){
+  var availableDates = [];
+  var calYear, calMonth;
+
+  function pad(n){ return n<10 ? '0'+n : ''+n; }
+  function fmtDate(y,m,d){ return y+'-'+pad(m+1)+'-'+pad(d); }
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+  function deltaBadge(delta){
+    if (delta > 0) return '<span style="color:#16a34a;font-weight:700;">▲ '+delta+'</span>';
+    if (delta < 0) return '<span style="color:#ef4444;font-weight:700;">▼ '+Math.abs(delta)+'</span>';
+    return '<span style="color:#888;">– 0</span>';
+  }
+  function noRow(cols){ return '<tr><td colspan="'+cols+'" style="padding:10px;font-size:12px;color:#888;">暂无数据</td></tr>'; }
+  function kwRow(k){
+    var page = (k.landing_page || '-').replace(location.origin, '') || '/';
+    return '<tr style="border-bottom:1px solid #f3f4f6;">' +
+      '<td style="padding:7px 8px;font-size:12px;">'+escapeHtml(k.keyword)+'</td>' +
+      '<td style="text-align:center;padding:7px 8px;font-size:12px;font-weight:700;">#'+k.position+'</td>' +
+      '<td style="text-align:center;padding:7px 8px;font-size:12px;">'+deltaBadge(k.delta)+'</td>' +
+      '<td style="text-align:center;padding:7px 8px;font-size:12px;">'+(k.volume||0)+'</td>' +
+      '<td style="padding:7px 8px;font-size:11px;color:#888;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+escapeHtml(page)+'</td>' +
+      '</tr>';
+  }
+  function oppRow(k){
+    var action = '排名 #'+k.position+'，月搜索量 '+(k.volume||0)+'，已进前30名，加强内链/更新内容有机会冲进前10';
+    return '<tr style="border-bottom:1px solid #f3f4f6;">' +
+      '<td style="padding:7px 8px;font-size:12px;">'+escapeHtml(k.keyword)+'</td>' +
+      '<td style="text-align:center;padding:7px 8px;font-size:12px;font-weight:700;color:#f59e0b;">#'+k.position+'</td>' +
+      '<td style="text-align:center;padding:7px 8px;font-size:12px;">'+(k.volume||0)+'</td>' +
+      '<td style="padding:7px 8px;font-size:11px;color:#555;">'+action+'</td>' +
+      '</tr>';
+  }
+  function renderData(data, dateStr){
+    document.getElementById('kw-stat-total').textContent = data.total_keywords || 0;
+    document.getElementById('kw-stat-avg').textContent = '#' + (data.avg_position != null ? data.avg_position : '-');
+    document.getElementById('kw-stat-top10').textContent = data.top10_count || 0;
+    document.getElementById('kw-stat-opp').textContent = (data.opportunities || []).length;
+    document.getElementById('kw-movers-up').innerHTML = (data.movers_up||[]).map(kwRow).join('') || noRow(5);
+    document.getElementById('kw-movers-down').innerHTML = (data.movers_down||[]).map(kwRow).join('') || noRow(5);
+    document.getElementById('kw-opportunities').innerHTML = (data.opportunities||[]).map(oppRow).join('') || noRow(4);
+    document.getElementById('kw-date-label').textContent = '（' + dateStr + ' 数据）';
+  }
+  function loadDate(dateStr){
+    fetch('keywords-history/' + dateStr + '.json')
+      .then(function(r){ return r.json(); })
+      .then(function(data){ renderData(data, dateStr); })
+      .catch(function(){});
+  }
+  function renderCalendar(){
+    var grid = document.getElementById('kw-cal-grid');
+    var first = new Date(calYear, calMonth, 1);
+    var startDay = first.getDay();
+    var daysInMonth = new Date(calYear, calMonth+1, 0).getDate();
+    document.getElementById('kw-cal-month-label').textContent = calYear + '年' + (calMonth+1) + '月';
+    var html = '';
+    ['日','一','二','三','四','五','六'].forEach(function(d){
+      html += '<div style="color:#888;font-weight:600;padding:4px 0;">'+d+'</div>';
+    });
+    for (var i=0;i<startDay;i++){ html += '<div></div>'; }
+    for (var d=1; d<=daysInMonth; d++){
+      var ds = fmtDate(calYear, calMonth, d);
+      if (availableDates.indexOf(ds) !== -1){
+        html += '<div class="kw-cal-day" data-date="'+ds+'" style="cursor:pointer;padding:5px 0;border-radius:6px;background:#eef2ff;color:#4f46e5;font-weight:600;">'+d+'</div>';
+      } else {
+        html += '<div style="padding:5px 0;color:#d1d5db;">'+d+'</div>';
+      }
+    }
+    grid.innerHTML = html;
+    var days = grid.querySelectorAll('.kw-cal-day');
+    for (var i=0;i<days.length;i++){
+      days[i].addEventListener('click', function(){ loadDate(this.getAttribute('data-date')); });
+    }
+  }
+  document.getElementById('kw-cal-prev').addEventListener('click', function(){
+    calMonth--; if (calMonth<0){ calMonth=11; calYear--; }
+    renderCalendar();
+  });
+  document.getElementById('kw-cal-next').addEventListener('click', function(){
+    calMonth++; if (calMonth>11){ calMonth=0; calYear++; }
+    renderCalendar();
+  });
+  var today = new Date();
+  calYear = today.getFullYear();
+  calMonth = today.getMonth();
+  fetch('keywords-history/index.json')
+    .then(function(r){ return r.json(); })
+    .then(function(idx){ availableDates = idx.dates || []; renderCalendar(); })
+    .catch(function(){ renderCalendar(); });
+})();
+</script>'''
 
 html = f'''<!DOCTYPE html>
 <html lang="zh">
@@ -385,6 +494,7 @@ html = f'''<!DOCTYPE html>
 
 <!-- Keyword rankings (refreshed daily) -->
 {keyword_section_html}
+{keyword_calendar_script}
 
 <!-- Full Checklist -->
 <div class="card">
