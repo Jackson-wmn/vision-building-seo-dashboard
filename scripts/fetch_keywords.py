@@ -33,8 +33,10 @@ def main():
         print(f"❌ SE Ranking Project API 错误：{e.code} {e.reason}")
         return
 
+    # The API returns a bare list of per-search-engine groups (not wrapped in {"data": ...})
+    engines = resp if isinstance(resp, list) else resp.get('data', [])
     all_keywords = []
-    for engine in resp.get('data', []):
+    for engine in engines:
         all_keywords.extend(engine.get('keywords', []))
 
     processed = []
