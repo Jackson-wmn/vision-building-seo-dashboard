@@ -1,0 +1,22 @@
+name: Test SE Ranking Key
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Fetch SE Ranking Audit Data
+        env:
+          SERANKING_API_KEY: ${{ secrets.SERANKING_API_KEY }}
+          SERANKING_AUDIT_ID: ${{ secrets.SERANKING_AUDIT_ID }}
+        run: python scripts/fetch_seranking.py
