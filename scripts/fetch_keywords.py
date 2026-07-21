@@ -16,23 +16,28 @@ def api(path):
     with urllib.request.urlopen(req, timeout=30) as r:
         return json.loads(r.read())
 
-def find_selected_group_id(site_id):
-    """Look up the keyword group the client has marked as their priority list (name contains 'selected')."""
+def find_selected_group_ids(site_id):
+    """Look up every keyword group the client has marked as priority (name contains 'selected').
+    Some projects split their priority list across multiple groups (e.g. "Wedding (Selected)",
+    "Event (Selected)"), so this returns the full set rather than just the first match."""
     try:
         groups = api(f'/project-management/keywords/groups?site_id={site_id}')
     except urllib.error.HTTPError as e:
         print(f"⚠️  无法读取关键词分组：{e.code} {e.reason}，跳过重点关键词监控")
-        return None
+        return set()
     groups = groups if isinstance(groups, list) else groups.get('data', [])
+    ids = set()
     for g in groups:
         if 'selected' in g.get('name', '').lower():
+            gid = g.get('id')
             try:
-                return int(g.get('id'))  # group id here is a string; keyword.group_id is an int
+                gid = int(gid)  # group id here is a string; keyword.group_id is an int
             except (TypeError, ValueError):
-                return g.get('id')
-    return None
+                pass
+            ids.add(gid)
+    return ids
 
-def build_snapshot(all_keywords, selected_group_id=None):
+def build_snapshot(all_keywords, selected_group_ids=None):
     """Turn a raw SE Ranking positions response into the dashboard's keywords.json shape."""
     processed = []
     for kw in all_keywords:
@@ -63,8 +68,8 @@ def build_snapshot(all_keywords, selected_group_id=None):
     top10_count  = sum(1 for k in processed if k['position'] <= 10)
 
     selected = None
-    if selected_group_id is not None:
-        sel = [k for k in processed if k['group_id'] == selected_group_id]
+    if selected_group_ids:
+        sel = [k for k in processed if k['group_id'] in selected_group_ids]
         sel.sort(key=lambda k: k['position'])
         selected = {
             'total':        len(sel),
@@ -109,8 +114,8 @@ def main():
     for engine in engines:
         all_keywords.extend(engine.get('keywords', []))
 
-    selected_group_id = find_selected_group_id(SITE_ID)
-    snapshot = build_snapshot(all_keywords, selected_group_id)
+    selected_group_ids = find_selected_group_ids(SITE_ID)
+    snapshot = build_snapshot(all_keywords, selected_group_ids)
 
     output = {
         'updated_at': datetime.datetime.utcnow().isoformat() + 'Z',
