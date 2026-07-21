@@ -2,7 +2,7 @@ name: Weekly SEO Audit
 
 on:
   schedule:
-    - cron: '0 1 * * 1'  # Every Monday 9am Malaysia time (UTC+8). Adjust for your timezone.
+    - cron: '17 1 * * 1'  # Every Monday ~9:17am Malaysia time (UTC+8). Off the hour to avoid GitHub Actions' top-of-hour scheduling delays.
   workflow_dispatch:       # Allow manual trigger from GitHub UI
 
 permissions:

@@ -2,7 +2,7 @@ name: Daily Keyword Rankings
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # Every day 8am Malaysia time (UTC+8). Offset from the weekly full audit (9am Monday) to avoid a push collision.
+    - cron: '13 0 * * *'  # Every day ~8:13am Malaysia time (UTC+8). Off the hour to avoid GitHub Actions' top-of-hour scheduling delays.
   workflow_dispatch:       # Allow manual trigger from GitHub UI
 
 permissions:
