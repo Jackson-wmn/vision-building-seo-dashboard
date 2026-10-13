@@ -1,11 +1,19 @@
 {
-  "updated_at": "2026-10-12T05:51:38.032167Z",
-  "date_from": "2026-10-05",
-  "date_to": "2026-10-12",
-  "total_keywords": 112,
-  "avg_position": 11.4,
-  "top10_count": 68,
+  "updated_at": "2026-10-13T06:44:37.826227Z",
+  "date_from": "2026-10-06",
+  "date_to": "2026-10-13",
+  "total_keywords": 111,
+  "avg_position": 11.6,
+  "top10_count": 65,
   "movers_up": [
+    {
+      "keyword": "team building package",
+      "position": 17,
+      "position_7d_ago": 55,
+      "delta": 38,
+      "volume": 390,
+      "landing_page": "https://vision.build/15-team-building-ideas-in-malaysia-that-actually-work-in-2025/"
+    },
     {
       "keyword": "teambuilding",
       "position": 9,
@@ -17,26 +25,10 @@
     {
       "keyword": "team-building",
       "position": 6,
-      "position_7d_ago": 21,
-      "delta": 15,
+      "position_7d_ago": 20,
+      "delta": 14,
       "volume": 470,
       "landing_page": "https://vision.build/17-indoor-team-building-activities-that-actually-work-in-malaysia"
-    },
-    {
-      "keyword": "corporate team building companies",
-      "position": 15,
-      "position_7d_ago": 26,
-      "delta": 11,
-      "volume": 170,
-      "landing_page": "https://vision.build/30-best-outdoor-team-building-activities-in-malaysia/"
-    },
-    {
-      "keyword": "team building events",
-      "position": 7,
-      "position_7d_ago": 17,
-      "delta": 10,
-      "volume": 260,
-      "landing_page": "https://vision.build/15-team-building-ideas-in-malaysia-that-actually-work-in-2025/"
     },
     {
       "keyword": "team building training provider in malaysia",
@@ -47,6 +39,22 @@
       "landing_page": "https://vision.build/choosing-the-best-team-building-training-for-your-team-in-malaysia"
     },
     {
+      "keyword": "team building organiser in malaysia",
+      "position": 7,
+      "position_7d_ago": 15,
+      "delta": 8,
+      "volume": 170,
+      "landing_page": "https://vision.build/15-team-building-ideas-in-malaysia-that-actually-work-in-2025/"
+    },
+    {
+      "keyword": "teambuilding malaysia",
+      "position": 4,
+      "position_7d_ago": 12,
+      "delta": 8,
+      "volume": 990,
+      "landing_page": "https://vision.build/30-best-outdoor-team-building-activities-in-malaysia/"
+    },
+    {
       "keyword": "team building program",
       "position": 10,
       "position_7d_ago": 18,
@@ -55,23 +63,23 @@
       "landing_page": "https://vision.build/15-team-building-ideas-in-malaysia-that-actually-work-in-2025/"
     },
     {
-      "keyword": "vendor team building",
-      "position": 18,
-      "position_7d_ago": 25,
-      "delta": 7,
-      "volume": 10,
-      "landing_page": "https://vision.build/30-best-outdoor-team-building-activities-in-malaysia/"
-    },
-    {
-      "keyword": "teambuilding event",
-      "position": 3,
-      "position_7d_ago": 8,
+      "keyword": "adventure team building",
+      "position": 6,
+      "position_7d_ago": 11,
       "delta": 5,
-      "volume": 110,
+      "volume": 30,
       "landing_page": "https://vision.build/30-best-outdoor-team-building-activities-in-malaysia/"
     }
   ],
   "movers_down": [
+    {
+      "keyword": "team building",
+      "position": 56,
+      "position_7d_ago": 7,
+      "delta": -49,
+      "volume": 4400,
+      "landing_page": "https://vision.build/top-7-activities-for-a-2-day-1-night-team-building-in-malaysia"
+    },
     {
       "keyword": "team building organizer malaysia",
       "position": 55,
@@ -81,27 +89,11 @@
       "landing_page": "https://vision.build/30-best-outdoor-team-building-activities-in-malaysia/"
     },
     {
-      "keyword": "team building company in malaysia",
-      "position": 53,
-      "position_7d_ago": 13,
-      "delta": -40,
-      "volume": 390,
-      "landing_page": "https://vision.build/15-team-building-ideas-in-malaysia-that-actually-work-in-2025/"
-    },
-    {
       "keyword": "corporate bonding",
       "position": 58,
-      "position_7d_ago": 31,
-      "delta": -27,
+      "position_7d_ago": 32,
+      "delta": -26,
       "volume": 210,
-      "landing_page": "https://vision.build/15-team-building-ideas-in-malaysia-that-actually-work-in-2025/"
-    },
-    {
-      "keyword": "team building programs",
-      "position": 16,
-      "position_7d_ago": 3,
-      "delta": -13,
-      "volume": 170,
       "landing_page": "https://vision.build/15-team-building-ideas-in-malaysia-that-actually-work-in-2025/"
     },
     {
@@ -111,14 +103,6 @@
       "delta": -11,
       "volume": 140,
       "landing_page": "https://vision.build/choosing-the-best-team-building-training-for-your-team-in-malaysia"
-    },
-    {
-      "keyword": "corporate team bonding",
-      "position": 55,
-      "position_7d_ago": 46,
-      "delta": -9,
-      "volume": 140,
-      "landing_page": "https://vision.build/15-team-building-ideas-in-malaysia-that-actually-work-in-2025/"
     },
     {
       "keyword": "team building kuala lumpur",
@@ -135,48 +119,72 @@
       "delta": -8,
       "volume": 210,
       "landing_page": "https://vision.build/15-team-building-ideas-in-malaysia-that-actually-work-in-2025/"
+    },
+    {
+      "keyword": "program team building",
+      "position": 33,
+      "position_7d_ago": 27,
+      "delta": -6,
+      "volume": 170,
+      "landing_page": "https://vision.build/15-team-building-ideas-in-malaysia-that-actually-work-in-2025/"
+    },
+    {
+      "keyword": "team building activities in selangor",
+      "position": 8,
+      "position_7d_ago": 2,
+      "delta": -6,
+      "volume": 70,
+      "landing_page": "https://vision.build/8-best-team-building-activities-in-selangor-and-kl"
     }
   ],
   "opportunities": [
     {
       "keyword": "team building activities in kl",
       "position": 24,
-      "position_7d_ago": 21,
-      "delta": -3,
+      "position_7d_ago": 22,
+      "delta": -2,
       "volume": 480,
       "landing_page": "https://vision.build/30-best-outdoor-team-building-activities-in-malaysia/"
     },
     {
       "keyword": "team building packages",
       "position": 13,
-      "position_7d_ago": 11,
-      "delta": -2,
+      "position_7d_ago": 12,
+      "delta": -1,
       "volume": 480,
       "landing_page": "https://vision.build/top-7-activities-for-a-2-day-1-night-team-building-in-malaysia"
     },
     {
       "keyword": "corporate team building malaysia",
       "position": 17,
-      "position_7d_ago": 16,
-      "delta": -1,
+      "position_7d_ago": 15,
+      "delta": -2,
       "volume": 390,
       "landing_page": "https://vision.build/15-team-building-ideas-in-malaysia-that-actually-work-in-2025/"
     },
     {
       "keyword": "team building company malaysia",
       "position": 11,
-      "position_7d_ago": 7,
-      "delta": -4,
+      "position_7d_ago": 11,
+      "delta": 0,
       "volume": 390,
       "landing_page": "https://vision.build/blog/how-to-choose-the-right-team-building-packages-in-malaysia"
     },
     {
       "keyword": "team building package",
       "position": 17,
-      "position_7d_ago": 18,
-      "delta": 1,
+      "position_7d_ago": 55,
+      "delta": 38,
       "volume": 390,
       "landing_page": "https://vision.build/15-team-building-ideas-in-malaysia-that-actually-work-in-2025/"
+    },
+    {
+      "keyword": "team building company in malaysia",
+      "position": 15,
+      "position_7d_ago": 13,
+      "delta": -2,
+      "volume": 390,
+      "landing_page": "https://vision.build/30-best-outdoor-team-building-activities-in-malaysia/"
     },
     {
       "keyword": "team building location",
@@ -189,24 +197,16 @@
     {
       "keyword": "team building area",
       "position": 16,
-      "position_7d_ago": 15,
-      "delta": -1,
+      "position_7d_ago": 17,
+      "delta": 1,
       "volume": 320,
       "landing_page": "https://vision.build/blog/top-5-outdoor-team-building-challenges-in-malaysia"
-    },
-    {
-      "keyword": "location for team building",
-      "position": 12,
-      "position_7d_ago": 12,
-      "delta": 0,
-      "volume": 320,
-      "landing_page": "https://vision.build/30-best-outdoor-team-building-activities-in-malaysia/"
     }
   ],
   "selected": {
-    "total": 35,
-    "top10_count": 17,
-    "avg_position": 12.1,
+    "total": 34,
+    "top10_count": 15,
+    "avg_position": 13.7,
     "keywords": [
       {
         "keyword": "outdoor team building",
@@ -235,8 +235,8 @@
       {
         "keyword": "best team building malaysia",
         "position": 2,
-        "position_7d_ago": 2,
-        "delta": 0,
+        "position_7d_ago": 1,
+        "delta": -1,
         "volume": 10,
         "landing_page": "https://vision.build/30-best-outdoor-team-building-activities-in-malaysia/"
       },
@@ -257,58 +257,42 @@
         "landing_page": "https://vision.build/30-best-outdoor-team-building-activities-in-malaysia/"
       },
       {
-        "keyword": "company team building",
+        "keyword": "teambuilding malaysia",
         "position": 4,
-        "position_7d_ago": 3,
+        "position_7d_ago": 12,
+        "delta": 8,
+        "volume": 990,
+        "landing_page": "https://vision.build/30-best-outdoor-team-building-activities-in-malaysia/"
+      },
+      {
+        "keyword": "company team building",
+        "position": 5,
+        "position_7d_ago": 4,
         "delta": -1,
         "volume": 140,
         "landing_page": "https://vision.build/30-best-outdoor-team-building-activities-in-malaysia/"
       },
       {
-        "keyword": "teambuilding malaysia",
-        "position": 5,
-        "position_7d_ago": 10,
-        "delta": 5,
-        "volume": 990,
-        "landing_page": "https://vision.build/30-best-outdoor-team-building-activities-in-malaysia/"
-      },
-      {
         "keyword": "team-building",
         "position": 6,
-        "position_7d_ago": 21,
-        "delta": 15,
+        "position_7d_ago": 20,
+        "delta": 14,
         "volume": 470,
         "landing_page": "https://vision.build/17-indoor-team-building-activities-that-actually-work-in-malaysia"
       },
       {
         "keyword": "hrdc team building",
         "position": 6,
-        "position_7d_ago": 7,
-        "delta": 1,
+        "position_7d_ago": 6,
+        "delta": 0,
         "volume": 90,
         "landing_page": "https://vision.build/hrd-crop-claimable-team-building-for-malaysian-companes"
       },
       {
-        "keyword": "team building",
-        "position": 7,
-        "position_7d_ago": 10,
-        "delta": 3,
-        "volume": 4400,
-        "landing_page": "https://vision.build/17-indoor-team-building-activities-that-actually-work-in-malaysia"
-      },
-      {
-        "keyword": "team building malaysia",
-        "position": 8,
-        "position_7d_ago": 8,
-        "delta": 0,
-        "volume": 20,
-        "landing_page": "https://vision.build/30-best-outdoor-team-building-activities-in-malaysia/"
-      },
-      {
         "keyword": "team building ideas malaysia",
         "position": 8,
-        "position_7d_ago": 8,
-        "delta": 0,
+        "position_7d_ago": 12,
+        "delta": 4,
         "volume": 320,
         "landing_page": "https://vision.build/15-team-building-ideas-in-malaysia-that-actually-work-in-2025/"
       },
@@ -321,12 +305,12 @@
         "landing_page": "https://vision.build/30-best-outdoor-team-building-activities-in-malaysia/"
       },
       {
-        "keyword": "outdoor activity team building",
+        "keyword": "team building malaysia",
         "position": 9,
         "position_7d_ago": 9,
         "delta": 0,
-        "volume": 390,
-        "landing_page": "https://vision.build/blog/top-5-outdoor-team-building-challenges-in-malaysia"
+        "volume": 20,
+        "landing_page": "https://vision.build/30-best-outdoor-team-building-activities-in-malaysia/"
       },
       {
         "keyword": "team building activities in malaysia",
@@ -339,8 +323,8 @@
       {
         "keyword": "team building activities malaysia",
         "position": 10,
-        "position_7d_ago": 10,
-        "delta": 0,
+        "position_7d_ago": 12,
+        "delta": 2,
         "volume": 320,
         "landing_page": "https://vision.build/30-best-outdoor-team-building-activities-in-malaysia/"
       },
@@ -355,8 +339,8 @@
       {
         "keyword": "team building company malaysia",
         "position": 11,
-        "position_7d_ago": 7,
-        "delta": -4,
+        "position_7d_ago": 11,
+        "delta": 0,
         "volume": 390,
         "landing_page": "https://vision.build/blog/how-to-choose-the-right-team-building-packages-in-malaysia"
       },
@@ -371,8 +355,8 @@
       {
         "keyword": "team building venue in malaysia",
         "position": 12,
-        "position_7d_ago": 10,
-        "delta": -2,
+        "position_7d_ago": 13,
+        "delta": 1,
         "volume": 110,
         "landing_page": "https://vision.build/30-best-outdoor-team-building-activities-in-malaysia/"
       },
@@ -387,8 +371,8 @@
       {
         "keyword": "places for team building",
         "position": 12,
-        "position_7d_ago": 12,
-        "delta": 0,
+        "position_7d_ago": 13,
+        "delta": 1,
         "volume": 320,
         "landing_page": "https://vision.build/30-best-outdoor-team-building-activities-in-malaysia/"
       },
@@ -411,32 +395,32 @@
       {
         "keyword": "team building hrdf claimable malaysia",
         "position": 15,
-        "position_7d_ago": 14,
-        "delta": -1,
+        "position_7d_ago": 15,
+        "delta": 0,
         "volume": 210,
         "landing_page": "https://vision.build/hrd-crop-claimable-team-building-for-malaysian-companes"
       },
       {
         "keyword": "corporate team building malaysia",
         "position": 17,
-        "position_7d_ago": 16,
-        "delta": -1,
+        "position_7d_ago": 15,
+        "delta": -2,
         "volume": 390,
         "landing_page": "https://vision.build/15-team-building-ideas-in-malaysia-that-actually-work-in-2025/"
       },
       {
         "keyword": "team building company",
         "position": 17,
-        "position_7d_ago": 22,
-        "delta": 5,
+        "position_7d_ago": 19,
+        "delta": 2,
         "volume": 110,
         "landing_page": "https://vision.build/15-team-building-ideas-in-malaysia-that-actually-work-in-2025/"
       },
       {
         "keyword": "kl team building",
         "position": 19,
-        "position_7d_ago": 17,
-        "delta": -2,
+        "position_7d_ago": 18,
+        "delta": -1,
         "volume": 260,
         "landing_page": "https://vision.build/30-best-outdoor-team-building-activities-in-malaysia/"
       },
@@ -451,8 +435,8 @@
       {
         "keyword": "team building kl",
         "position": 20,
-        "position_7d_ago": 19,
-        "delta": -1,
+        "position_7d_ago": 18,
+        "delta": -2,
         "volume": 320,
         "landing_page": "https://vision.build/30-best-outdoor-team-building-activities-in-malaysia/"
       },
@@ -467,8 +451,8 @@
       {
         "keyword": "team building activities in kl",
         "position": 24,
-        "position_7d_ago": 21,
-        "delta": -3,
+        "position_7d_ago": 22,
+        "delta": -2,
         "volume": 480,
         "landing_page": "https://vision.build/30-best-outdoor-team-building-activities-in-malaysia/"
       },
@@ -487,6 +471,14 @@
         "delta": -45,
         "volume": 170,
         "landing_page": "https://vision.build/30-best-outdoor-team-building-activities-in-malaysia/"
+      },
+      {
+        "keyword": "team building",
+        "position": 56,
+        "position_7d_ago": 7,
+        "delta": -49,
+        "volume": 4400,
+        "landing_page": "https://vision.build/top-7-activities-for-a-2-day-1-night-team-building-in-malaysia"
       }
     ]
   }
