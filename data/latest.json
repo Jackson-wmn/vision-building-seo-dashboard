@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T06:15:56.527297Z",
+  "generated_at": "2026-10-26T06:19:21.374288Z",
   "site": "https://vision.build",
   "period_days": 90,
   "scores": {
@@ -13,108 +13,115 @@
     "images": 75
   },
   "gsc": {
-    "total_clicks": 1617,
-    "total_impressions": 108380,
-    "avg_ctr": 1.49,
-    "avg_position": 14.8,
+    "total_clicks": 1591,
+    "total_impressions": 105803,
+    "avg_ctr": 1.5,
+    "avg_position": 15.0,
     "top_queries": [
       {
         "query": "vision building",
-        "clicks": 371,
-        "impressions": 1256,
-        "ctr": 29.54,
-        "position": 2.9
+        "clicks": 365,
+        "impressions": 1246,
+        "ctr": 29.29,
+        "position": 2.8
       },
       {
         "query": "vision building team building",
-        "clicks": 59,
-        "impressions": 267,
-        "ctr": 22.1,
-        "position": 1.8
+        "clicks": 61,
+        "impressions": 266,
+        "ctr": 22.93,
+        "position": 1.7
       },
       {
         "query": "vb advisory sdn bhd",
         "clicks": 29,
-        "impressions": 116,
-        "ctr": 25.0,
-        "position": 1.8
+        "impressions": 114,
+        "ctr": 25.44,
+        "position": 1.6
       },
       {
         "query": "team building games indoor",
-        "clicks": 25,
-        "impressions": 416,
-        "ctr": 6.01,
-        "position": 4.9
-      },
-      {
-        "query": "indoor team building activities",
-        "clicks": 8,
-        "impressions": 382,
-        "ctr": 2.09,
-        "position": 3.6
+        "clicks": 27,
+        "impressions": 426,
+        "ctr": 6.34,
+        "position": 5.0
       },
       {
         "query": "team building",
-        "clicks": 8,
-        "impressions": 7622,
-        "ctr": 0.1,
-        "position": 10.3
+        "clicks": 9,
+        "impressions": 5202,
+        "ctr": 0.17,
+        "position": 11.1
       },
       {
         "query": "team building malaysia",
-        "clicks": 7,
-        "impressions": 1879,
-        "ctr": 0.37,
-        "position": 12.1
+        "clicks": 8,
+        "impressions": 1858,
+        "ctr": 0.43,
+        "position": 12.6
       },
       {
         "query": "vision build",
         "clicks": 7,
-        "impressions": 167,
-        "ctr": 4.19,
-        "position": 5.2
+        "impressions": 163,
+        "ctr": 4.29,
+        "position": 5.5
       },
       {
         "query": "vision building team building & training",
         "clicks": 7,
-        "impressions": 448,
-        "ctr": 1.56,
+        "impressions": 350,
+        "ctr": 2.0,
         "position": 1.0
       },
       {
         "query": "vision building team building & training petaling jaya reviews",
-        "clicks": 7,
-        "impressions": 178,
-        "ctr": 3.93,
+        "clicks": 6,
+        "impressions": 184,
+        "ctr": 3.26,
         "position": 2.7
       },
       {
         "query": "game indoor",
         "clicks": 5,
-        "impressions": 158,
-        "ctr": 3.16,
-        "position": 6.9
-      },
-      {
-        "query": "game untuk team building indoor",
-        "clicks": 5,
-        "impressions": 38,
-        "ctr": 13.16,
-        "position": 3
+        "impressions": 162,
+        "ctr": 3.09,
+        "position": 6.8
       },
       {
         "query": "hrdc claimable team building",
         "clicks": 5,
-        "impressions": 356,
+        "impressions": 358,
         "ctr": 1.4,
-        "position": 5.2
+        "position": 5.4
+      },
+      {
+        "query": "indoor games",
+        "clicks": 5,
+        "impressions": 773,
+        "ctr": 0.65,
+        "position": 8.1
+      },
+      {
+        "query": "indoor team building activities",
+        "clicks": 5,
+        "impressions": 363,
+        "ctr": 1.38,
+        "position": 3.0
+      },
+      {
+        "query": "outdoor team building activities",
+        "clicks": 5,
+        "impressions": 341,
+        "ctr": 1.47,
+        "position": 3.7
       },
       {
         "query": "team building indoor activities",
         "clicks": 5,
-        "impressions": 47,
-        "ctr": 10.64,
-        "position": 3.2
+        "impressions": 51,
+        "ctr": 9.8,
+        "position": 2.6
       },
       {
         "query": "vb advisory",
@@ -126,268 +133,261 @@
       {
         "query": "aktiviti team building outdoor",
         "clicks": 4,
-        "impressions": 49,
-        "ctr": 8.16,
-        "position": 4.4
+        "impressions": 44,
+        "ctr": 9.09,
+        "position": 4
       },
       {
         "query": "best team building place in malaysia",
         "clicks": 4,
-        "impressions": 54,
-        "ctr": 7.41,
-        "position": 11.6
+        "impressions": 41,
+        "ctr": 9.76,
+        "position": 12.9
+      },
+      {
+        "query": "game for team building indoor",
+        "clicks": 4,
+        "impressions": 28,
+        "ctr": 14.29,
+        "position": 3.5
       },
       {
         "query": "game team building",
         "clicks": 4,
-        "impressions": 48,
-        "ctr": 8.33,
-        "position": 4.8
-      },
-      {
-        "query": "game team building indoor",
-        "clicks": 4,
-        "impressions": 53,
-        "ctr": 7.55,
-        "position": 3.1
-      },
-      {
-        "query": "indoor games",
-        "clicks": 4,
-        "impressions": 729,
-        "ctr": 0.55,
-        "position": 8.1
+        "impressions": 55,
+        "ctr": 7.27,
+        "position": 4.6
       }
     ],
     "top_pages": [
       {
         "page": "/",
-        "clicks": 482,
-        "impressions": 4494,
-        "position": 10.1
+        "clicks": 481,
+        "impressions": 4362,
+        "position": 9.6
       },
       {
         "page": "/17-indoor-team-building-activities-that-actually-work-in-malaysia",
-        "clicks": 286,
-        "impressions": 14396,
-        "position": 14.7
+        "clicks": 303,
+        "impressions": 13779,
+        "position": 15.8
       },
       {
         "page": "/30-best-outdoor-team-building-activities-in-malaysia/",
-        "clicks": 130,
-        "impressions": 28981,
-        "position": 23.0
+        "clicks": 124,
+        "impressions": 28073,
+        "position": 23.9
       },
       {
         "page": "https://www.vision.build/",
-        "clicks": 70,
-        "impressions": 6796,
-        "position": 5.3
+        "clicks": 67,
+        "impressions": 7604,
+        "position": 5.2
       },
       {
         "page": "/8-best-team-building-activities-in-selangor-and-kl",
-        "clicks": 64,
-        "impressions": 12136,
-        "position": 60.3
+        "clicks": 61,
+        "impressions": 12350,
+        "position": 60.0
       },
       {
         "page": "/about/our-trainers",
         "clicks": 60,
-        "impressions": 1619,
-        "position": 3.2
+        "impressions": 1591,
+        "position": 3.1
       },
       {
         "page": "/hrd-crop-claimable-team-building-for-malaysian-companes",
-        "clicks": 56,
-        "impressions": 7880,
-        "position": 13.8
+        "clicks": 57,
+        "impressions": 8235,
+        "position": 13.9
       },
       {
         "page": "/15-team-building-ideas-in-malaysia-that-actually-work-in-2025/",
-        "clicks": 42,
-        "impressions": 18531,
+        "clicks": 46,
+        "impressions": 18641,
         "position": 41.7
       },
       {
-        "page": "/2-day-1-night-team-building-malaysia-complete-itinerary-amp-ideas",
-        "clicks": 42,
-        "impressions": 2828,
-        "position": 31.6
+        "page": "/blog/6-icebreaker-games-that-always-energize-your-team-in-malaysia-2",
+        "clicks": 41,
+        "impressions": 2560,
+        "position": 18.8
       },
       {
-        "page": "/initiative/career",
-        "clicks": 41,
-        "impressions": 1084,
-        "position": 2.8
+        "page": "/2-day-1-night-team-building-malaysia-complete-itinerary-amp-ideas",
+        "clicks": 40,
+        "impressions": 2871,
+        "position": 32.3
       }
     ],
     "countries": [
       {
         "country": "MYS",
-        "clicks": 1436
+        "clicks": 1411
       },
       {
         "country": "SGP",
-        "clicks": 63
+        "clicks": 57
       },
       {
         "country": "USA",
-        "clicks": 19
+        "clicks": 22
+      },
+      {
+        "country": "AUS",
+        "clicks": 11
       },
       {
         "country": "GBR",
         "clicks": 10
-      },
-      {
-        "country": "AUS",
-        "clicks": 9
       }
     ],
     "devices": [
       {
         "device": "DESKTOP",
-        "clicks": 969,
-        "impressions": 81286
+        "clicks": 963,
+        "impressions": 78212
       },
       {
         "device": "MOBILE",
-        "clicks": 638,
-        "impressions": 26123
+        "clicks": 620,
+        "impressions": 26817
       },
       {
         "device": "TABLET",
-        "clicks": 10,
-        "impressions": 971
+        "clicks": 8,
+        "impressions": 774
       }
     ]
   },
   "ga4": {
-    "total_sessions": 26908,
+    "total_sessions": 26599,
     "channels": [
       {
         "channel": "Paid Search",
-        "sessions": 11928,
-        "users": 9766,
-        "bounce": 50.3,
-        "duration": 119
+        "sessions": 11782,
+        "users": 9446,
+        "bounce": 50.2,
+        "duration": 118
       },
       {
         "channel": "Direct",
-        "sessions": 9417,
-        "users": 8883,
-        "bounce": 83.0,
-        "duration": 36
+        "sessions": 9469,
+        "users": 8904,
+        "bounce": 82.2,
+        "duration": 35
       },
       {
         "channel": "Organic Search",
-        "sessions": 2744,
-        "users": 2097,
-        "bounce": 37.2,
-        "duration": 197
+        "sessions": 2779,
+        "users": 2062,
+        "bounce": 38.5,
+        "duration": 193
       },
       {
         "channel": "Referral",
-        "sessions": 2333,
-        "users": 1940,
-        "bounce": 61.0,
-        "duration": 101
+        "sessions": 2134,
+        "users": 1785,
+        "bounce": 59.8,
+        "duration": 103
       },
       {
         "channel": "Organic Social",
-        "sessions": 210,
-        "users": 179,
-        "bounce": 32.4,
-        "duration": 109
+        "sessions": 186,
+        "users": 163,
+        "bounce": 36.0,
+        "duration": 100
       },
       {
         "channel": "Unassigned",
-        "sessions": 90,
-        "users": 90,
-        "bounce": 97.8,
-        "duration": 57
+        "sessions": 80,
+        "users": 80,
+        "bounce": 98.8,
+        "duration": 36
       },
       {
         "channel": "AI Assistant",
-        "sessions": 83,
-        "users": 66,
-        "bounce": 44.6,
-        "duration": 165
+        "sessions": 77,
+        "users": 61,
+        "bounce": 40.3,
+        "duration": 196
       },
       {
         "channel": "Cross-network",
-        "sessions": 77,
-        "users": 77,
-        "bounce": 29.9,
-        "duration": 171
+        "sessions": 71,
+        "users": 71,
+        "bounce": 32.4,
+        "duration": 174
       },
       {
         "channel": "Organic Video",
-        "sessions": 26,
-        "users": 24,
-        "bounce": 65.4,
-        "duration": 220
+        "sessions": 21,
+        "users": 19,
+        "bounce": 71.4,
+        "duration": 252
       }
     ],
     "top_pages": [
       {
         "page": "/product/destress-team-building-malaysia",
-        "sessions": 4236,
+        "sessions": 4124,
         "bounce": 42.6,
         "duration": 107
       },
       {
         "page": "/product/theme-based",
-        "sessions": 4131,
-        "bounce": 58.1,
-        "duration": 73
+        "sessions": 3949,
+        "bounce": 57.1,
+        "duration": 76
       },
       {
         "page": "/product/adventure-team-building",
-        "sessions": 2788,
-        "bounce": 41.4,
-        "duration": 93
+        "sessions": 2807,
+        "bounce": 40.5,
+        "duration": 92
       },
       {
         "page": "/",
-        "sessions": 2701,
-        "bounce": 53.2,
-        "duration": 66
+        "sessions": 2608,
+        "bounce": 52.6,
+        "duration": 65
       },
       {
         "page": "/product/ai-onboarding-programme",
-        "sessions": 1393,
-        "bounce": 33.5,
-        "duration": 122
+        "sessions": 1510,
+        "bounce": 32.7,
+        "duration": 123
       },
       {
         "page": "/product/team-building-programmes",
-        "sessions": 1113,
-        "bounce": 38.4,
-        "duration": 71
-      },
-      {
-        "page": "/get-started",
-        "sessions": 909,
-        "bounce": 27.4,
-        "duration": 96
+        "sessions": 1077,
+        "bounce": 37.4,
+        "duration": 76
       },
       {
         "page": "/event-voting",
-        "sessions": 907,
-        "bounce": 50.6,
+        "sessions": 912,
+        "bounce": 50.7,
         "duration": 126
       },
       {
-        "page": "/about/our-trainers",
-        "sessions": 835,
-        "bounce": 26.6,
-        "duration": 105
+        "page": "/get-started",
+        "sessions": 884,
+        "bounce": 28.4,
+        "duration": 94
       },
       {
-        "page": "/product/ai-team-building",
-        "sessions": 680,
-        "bounce": 47.5,
-        "duration": 112
+        "page": "/about/our-trainers",
+        "sessions": 808,
+        "bounce": 26.5,
+        "duration": 103
+      },
+      {
+        "page": "/about/the-journey",
+        "sessions": 580,
+        "bounce": 35.7,
+        "duration": 85
       }
     ]
   },
